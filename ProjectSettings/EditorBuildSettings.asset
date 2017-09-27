@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Scene/Login.unity
+    guid: 7729b7f1d7d814fb2ba484435c7f87f9
+  - enabled: 1
+    path: Assets/_Scene/Main.unity
+    guid: 6c370f9a09f1b42e28e1ab9f420172bd
+  - enabled: 1
+    path: Assets/_Scene/Hero.unity
+    guid: 2047c38ed9a974caf9b332d8798ba610
+  - enabled: 1
+    path: Assets/_Scene/HeroDetail.unity
+    guid: a45a999d359174de89fc38812074af8b
+  - enabled: 1
+    path: Assets/_Scene/Skill.unity
+    guid: 5b943751968314add850897178c566f5
+  - enabled: 1
+    path: Assets/_Scene/SkillDetail.unity
+    guid: c8c7f90e6f1224ff580ef1282e7dcf98
+  - enabled: 1
+    path: Assets/_Scene/Chapter.unity
+    guid: 4ef1317b9c4e94feaa752e386add121e
+  - enabled: 1
+    path: Assets/_Scene/Battle.unity
+    guid: b5ba42259010f4de7bd95f51402d17ea
+  - enabled: 1
+    path: Assets/_Scene/Fight.unity
+    guid: 4002a5c0f05e443fbbb38ee27891cf1a
+  - enabled: 1
+    path: Assets/_Scene/Center.unity
+    guid: dc1c85df4ebd6421a967d86c113e8175
+  - enabled: 1
+    path: Assets/_Scene/HeroSelect.unity
+    guid: a1d8cf7f60f814e028b908145a29e4af
+  - enabled: 1
+    path: Assets/_Scene/Bag.unity
+    guid: 801a4482bd2c943a7902333d24f8ca88
+  - enabled: 1
+    path: Assets/_Scene/SkillSelect.unity
+    guid: 135bf63015514451aba44eb8a584ab8a
