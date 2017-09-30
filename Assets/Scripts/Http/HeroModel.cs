@@ -20,6 +20,17 @@ public class HeroModel
 	public string exSkillId;
 	public int status;
 	public int position;
+
+	public string exSkillId1;
+	public string exSkillId2;
+	public int exp;
+
+	public SkillModel skill;
+	public SkillModel exSkill1;
+	public SkillModel exSkill2;
+
+	public int canIntoNum; // 可以给指定战法增加多少进度 (实时计算)
+	public int canSkillPoint;
 }
 
 

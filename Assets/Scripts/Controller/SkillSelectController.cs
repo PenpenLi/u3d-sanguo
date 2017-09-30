@@ -17,8 +17,29 @@ public class SkillSelectController : MonoBehaviour, IHeroHttpRequestDelegate {
 	public ScrollRect skillContent;
 
 	private HeroHttpRequest heroRequest;
+	private SkillHttpRequest skillRequest;
 
 	private SkillHeroScrollList skillHeroScrollList; 
+	private SkillSkillScrollList skillScrollList;
+
+	private HeroModel currentHero;
+	private int currentPosition;
+
+	void Awake(){
+		skillHeroScrollList = content.viewport.GetComponentInChildren<SkillHeroScrollList> ();
+		skillScrollList = skillContent.viewport.GetComponentInChildren<SkillSkillScrollList> ();
+
+		skillRequest = Singleton<SkillHttpRequest>.Instance;
+		heroRequest = Singleton<HeroHttpRequest>.Instance;
+
+		skillRequest.GetAllUserSkillsSuccess += GetAllUserSkillsSuccess;
+		heroRequest.AddSkillSuccess += AddSkillSuccess;
+	}
+
+	void OnDestroy(){
+		skillRequest.GetAllUserSkillsSuccess -= GetAllUserSkillsSuccess;
+		heroRequest.AddSkillSuccess -= AddSkillSuccess;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -26,10 +47,11 @@ public class SkillSelectController : MonoBehaviour, IHeroHttpRequestDelegate {
 
 		backBtn.onClick.AddListener (BackClick);
 
-		heroRequest = Singleton<HeroHttpRequest>.Instance;
-		heroRequest.getAllHero (this);
+		exSkill1Btn.onClick.AddListener (ExSkill1BtnClick);
+		exSkill2Btn.onClick.AddListener (ExSkill2BtnClick);
 
-		skillHeroScrollList = content.viewport.GetComponentInChildren<SkillHeroScrollList> ();
+		heroRequest.getAllHero ();
+
 	}
 	
 	// Update is called once per frame
@@ -42,10 +64,20 @@ public class SkillSelectController : MonoBehaviour, IHeroHttpRequestDelegate {
 			skillPanel.gameObject.SetActive (false);
 			content.gameObject.SetActive (true);
 
-			heroRequest.getAllHero (this);
+			heroRequest.getAllHero ();
 		}else{
 			SceneManager.LoadScene ("Center");
 		}
+	}
+
+	void ExSkill1BtnClick(){
+		currentPosition = 1;
+		skillRequest.GetAllUserSkills ();
+	}
+
+	void ExSkill2BtnClick(){
+		currentPosition = 2;
+		skillRequest.GetAllUserSkills ();
 	}
 
 	//
@@ -54,19 +86,35 @@ public class SkillSelectController : MonoBehaviour, IHeroHttpRequestDelegate {
 	}
 
 	public void HeroItemClick(HeroModel hero){
+		currentHero = hero;
+
 		content.gameObject.SetActive (false);
 		skillPanel.gameObject.SetActive (true);
 		RefreshSkillPanel (hero);
 	}
 
+	public void GetAllUserSkillsSuccess(List<SkillModel> skills){
+		skillScrollList.RefreshSkills (skills, this);
+	}
+
 	public void SkillItemClick(SkillModel skill){
-		
+		heroRequest.AddSkill (currentHero, skill, currentPosition);
 	}
 
 	void RefreshSkillPanel(HeroModel hero){
 		heroNameText.text = hero.nickname;
-		skillText.text = hero.skillId;
-		exSkill1Btn.GetComponent<Text> ().text = "1";
-		exSkill2Btn.GetComponent<Text> ().text = "2";
+		if(hero.skill != null){
+			skillText.text = hero.skill.skillName;
+		}
+		if(hero.exSkill1 != null){
+			exSkill1Btn.GetComponentInChildren<Text> ().text = hero.exSkill1.skillName;
+		}
+		if(hero.exSkill2 != null){
+			exSkill2Btn.GetComponentInChildren<Text> ().text = hero.exSkill2.skillName;
+		}
+	}
+
+	public void AddSkillSuccess(HeroModel hero){
+		RefreshSkillPanel (hero);
 	}
 }

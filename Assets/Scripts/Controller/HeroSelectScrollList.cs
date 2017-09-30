@@ -10,16 +10,11 @@ public class HeroSelectScrollList : MonoBehaviour, IHeroItemDelegate {
 	private List<HeroModel> heros = new List<HeroModel>();
 	private List<Button> btns = new List<Button>();
 
-	private float screenW;
-
 	public HeroSelectController heroSelectController;
 
 	// Use this for initialization
 	void Start () {
-		GameObject canvasObj = GameObject.FindGameObjectWithTag ("HeroSelectCanvas");
-		if(canvasObj != null){
-			screenW = canvasObj.GetComponent<RectTransform> ().rect.width;
-		}
+		
 	}
 
 	// Update is called once per frame

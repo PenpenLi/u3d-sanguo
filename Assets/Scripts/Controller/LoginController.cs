@@ -3,20 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-// List<T>
-[System.Serializable]
-public class Serialization<T>
-{
-	[SerializeField]
-	List<T> target;
-	public List<T> ToList() { return target; }
-
-	public Serialization(List<T> target)
-	{
-		this.target = target;
-	}
-}
 	
 public class LoginController : MonoBehaviour {
 
@@ -26,7 +12,7 @@ public class LoginController : MonoBehaviour {
 	private InputField accountInput;
 	private InputField passwordInput;
 
-	private LoginHttpRequest loginRequest;
+	private UserHttpRequest loginRequest;
 
 	// Use this for initialization
 	void Start () {
@@ -61,7 +47,7 @@ public class LoginController : MonoBehaviour {
 
 		GameObject httpRequestObject = GameObject.FindGameObjectWithTag ("LoginHttpRequest");
 		if(httpRequestObject != null){
-			loginRequest = httpRequestObject.GetComponent<LoginHttpRequest> ();
+			loginRequest = httpRequestObject.GetComponent<UserHttpRequest> ();
 		}
 	}
 	

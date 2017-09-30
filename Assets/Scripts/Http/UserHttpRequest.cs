@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System;
 
-public class LoginHttpRequest : MonoBehaviour {
+public class UserHttpRequest : MonoBehaviour {
 
 	private LoginController loginController;
+
+	public Action<UserModel> GetSkillPointSuccess;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +28,35 @@ public class LoginHttpRequest : MonoBehaviour {
 	public void Login(string account, string password, LoginController controller){
 		loginController = controller;
 		StartCoroutine (HttpLogin(account, password));
+	}
+
+	public void GetSkillPoint(){
+		StartCoroutine (HttpGetSkillPoint());
+	}
+
+	IEnumerator HttpGetSkillPoint(){
+		UnityWebRequest request = UnityWebRequest.Get ("http://127.0.0.1:8080/api/user/skill_point");
+		string token = PlayerPrefs.GetString (PrefDefine.PP_USER_SESSION_TOKEN);
+		request.SetRequestHeader ("session_id", token);
+		yield return request.Send ();
+
+		if (request.isNetworkError) {
+			Debug.Log (request.error);
+		} else {
+			if (request.responseCode == 200) {
+				string text = request.downloadHandler.text;
+				Debug.Log ("response " + text);
+
+				ResponseModel<UserModel> responseModel = JsonUtility.FromJson<ResponseModel<UserModel>> (text);
+				if(responseModel.code == 200){
+					if(GetSkillPointSuccess != null){
+						GetSkillPointSuccess (responseModel.data);
+					}
+				}
+			} else {
+				Debug.Log ("responseCode is not OK");
+			}
+		}
 	}
 		
 	IEnumerator HttpRegiste(string account, string password){

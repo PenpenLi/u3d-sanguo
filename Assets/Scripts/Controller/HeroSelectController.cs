@@ -23,6 +23,16 @@ public class HeroSelectController : MonoBehaviour, IHeroHttpRequestDelegate, IHe
 	private HeroHttpRequest heroRequest;
 	private int selectedPosition;
 
+	void Awake(){
+		heroRequest = Singleton<HeroHttpRequest>.Instance;
+		heroRequest.GetAllHeroSuccess += GetAllHeroSuccess;
+	}
+
+	void OnDestroy(){
+		heroRequest.GetAllHeroSuccess -= GetAllHeroSuccess;
+	}
+
+
 	void Start(){
 		backBtn.onClick.AddListener (BackClick);
 
@@ -38,7 +48,6 @@ public class HeroSelectController : MonoBehaviour, IHeroHttpRequestDelegate, IHe
 		twoHeroRemoveBtn.gameObject.SetActive (false);
 		threeHeroRemoveBtn.gameObject.SetActive (false);
 
-		heroRequest = Singleton<HeroHttpRequest>.Instance;
 		heroRequest.getSelectedHeros (this);
 
 		selectScrollList = scrollView.viewport.GetComponentInChildren<HeroSelectScrollList>();
@@ -53,7 +62,7 @@ public class HeroSelectController : MonoBehaviour, IHeroHttpRequestDelegate, IHe
 		OneSelected ();
 
 		if (oneHeroBtn.GetComponentInChildren<Text> ().text.Equals("未选择")) {
-			heroRequest.getAllHero (this);
+			heroRequest.getAllHero ();
 		} else {
 			oneHeroRemoveBtn.gameObject.SetActive (true);
 		}
@@ -67,7 +76,7 @@ public class HeroSelectController : MonoBehaviour, IHeroHttpRequestDelegate, IHe
 		TwoSelected ();
 
 		if (twoHeroBtn.GetComponentInChildren<Text> ().text.Equals("未选择")) {
-			heroRequest.getAllHero (this);
+			heroRequest.getAllHero ();
 		}else{
 			twoHeroRemoveBtn.gameObject.SetActive (true);
 		}
@@ -81,7 +90,7 @@ public class HeroSelectController : MonoBehaviour, IHeroHttpRequestDelegate, IHe
 		ThreeSelected ();
 
 		if (threeHeroBtn.GetComponentInChildren<Text> ().text.Equals("未选择")) {
-			heroRequest.getAllHero (this);
+			heroRequest.getAllHero ();
 		}else{
 			threeHeroRemoveBtn.gameObject.SetActive (true);
 		}
@@ -164,13 +173,13 @@ public class HeroSelectController : MonoBehaviour, IHeroHttpRequestDelegate, IHe
 	#region IHeroSelectHttpRequestDelegate
 	public void SelectHeroSuccess(){
 		// 更新待选武将列表
-		heroRequest.getAllHero (this);
+		heroRequest.getAllHero ();
 		//更新已选武将列表
 		heroRequest.getSelectedHeros(this);
 	}
 	public void DeSelectHeroSuccess(){
 		// 更新待选武将列表
-		heroRequest.getAllHero (this);
+		heroRequest.getAllHero ();
 		//更新已选武将列表
 		heroRequest.getSelectedHeros(this);
 	}

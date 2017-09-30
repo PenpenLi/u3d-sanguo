@@ -39,7 +39,6 @@ public class ConvertHelper
 	public static string RoundToStr(float f, int acc)
 	{
 		string[] nums = f.ToString ().Split ('.');
-		string str = "";
 		if(nums.Length > 1){
 			nums[1] = nums[1].Substring (0, acc);
 		}

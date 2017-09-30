@@ -10,14 +10,10 @@ public class FightScrollList : MonoBehaviour {
 
 	private List<FightItemModel> fightItems = new List<FightItemModel>();
 
-	private float screenW;
 
 	// Use this for initialization
 	void Start () {
-		GameObject canvasObj = GameObject.FindGameObjectWithTag ("FightCanvas");
-		if(canvasObj != null){
-			screenW = canvasObj.GetComponent<RectTransform> ().rect.width;
-		}
+		
 	}
 
 	// Update is called once per frame

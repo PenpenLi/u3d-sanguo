@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillSkillItemButton : MonoBehaviour {
+public class SkillSkillItem : MonoBehaviour {
 
 	public Button btn;
 	public Text skillNameText;
-	public Text skillText;
-	public Text exSkill1Text;
+	public Text skillTypeText;
+	public Text soldierTypeText;
+	public Text atkDistText;
+	public Text atkDestText;
 	public Text statusText;
 
-	private SkillHeroScrollList skillHeroScrollList;
-	private HeroModel currentHero;
+	private SkillSkillScrollList skillScrollList;
+	private SkillModel currentSkill;
 
 	// Use this for initialization
 	void Start () {
@@ -24,17 +26,23 @@ public class SkillSkillItemButton : MonoBehaviour {
 
 	}
 
-	public void Bind(HeroModel hero, SkillHeroScrollList list){
-		this.skillHeroScrollList = list;
-		this.currentHero = hero;
+	public void Bind(SkillModel skill, SkillSkillScrollList list){
+		this.skillScrollList = list;
+		this.currentSkill = skill;
 
-		nameText.text = hero.nickname;
-		skillText.text = hero.skillId;
-		exSkill1Text.text = "1";
-		exSkill2Text.text = "2";
+		skillNameText.text = skill.skillName;
+		skillTypeText.text = "战法类型：" + PrefDefine.SKILL_TYPE[skill.skillType];
+		soldierTypeText.text = "士兵类型：" + PrefDefine.SOLDIER_TYPE[skill.soldierType];
+		atkDistText.text = "攻击距离：" + skill.atkDist + "";
+		atkDestText.text = "攻击目标：" + skill.atkDest;
+		if(skill.useHeroId != null){
+			statusText.text = "分配给\n" + skill.useHeroModel.nickname;
+		}else{
+			statusText.text = "未分配";
+		}
 	}
 
 	void ItemClick(){
-		this.skillHeroScrollList.ItemClick (this.currentHero);
+		this.skillScrollList.ItemClick (this.currentSkill);
 	}
 }

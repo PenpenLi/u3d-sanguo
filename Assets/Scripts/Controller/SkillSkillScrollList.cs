@@ -32,7 +32,7 @@ public class SkillSkillScrollList : MonoBehaviour {
 				btns.Add (bt);
 				bt.transform.SetParent (transform, true);
 
-				SkillSkillItem item = bt.GetComponent<SkillHeroItem> ();
+				SkillSkillItem item = bt.GetComponent<SkillSkillItem> ();
 				item.Bind (skill, this);
 			}
 		}

@@ -44,3 +44,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scene/SkillSelect.unity
     guid: 135bf63015514451aba44eb8a584ab8a
+  - enabled: 1
+    path: Assets/_Scene/HeroInto.unity
+    guid: cd6c0bdb6e6c5486a8c150bd17b01332
+  - enabled: 1
+    path: Assets/_Scene/SkillGet.unity
+    guid: 7b0abb7054d0f44a2b407076812da20e
+  - enabled: 1
+    path: Assets/_Scene/SkillInto.unity
+    guid: a84c42d3bd7004149a6e062a423f346e
+  - enabled: 1
+    path: Assets/_Scene/SkillExp.unity
+    guid: 2d8048da0d4fe43f8b1a77877007f45a
+  - enabled: 1
+    path: Assets/_Scene/SkillUp.unity
+    guid: 479af0b1bff724413886f3b4f40e7940

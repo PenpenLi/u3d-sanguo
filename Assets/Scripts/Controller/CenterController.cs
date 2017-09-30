@@ -10,12 +10,13 @@ public class CenterController : MonoBehaviour {
 
 	public Button selectHeroBtn;
 
-	public Button selectSkillBtn;
 	public Button heroIntoBtn;
+	public Button selectSkillBtn;
 
-	public Button fenJieHeroBtn;
+	public Button skillGetBtn;
 	public Button skillIntoBtn;
 	public Button skillUpBtn;
+	public Button skillExpGetBtn;
 
 	void Awake(){
 
@@ -27,6 +28,12 @@ public class CenterController : MonoBehaviour {
 		selectHeroBtn.onClick.AddListener (SelectHeroClick);
 
 		selectSkillBtn.onClick.AddListener (SelectSkillClick);
+		heroIntoBtn.onClick.AddListener (HeroIntoClick);
+
+		skillGetBtn.onClick.AddListener (SkillGetClick);
+		skillIntoBtn.onClick.AddListener (SkillIntoClick);
+		skillUpBtn.onClick.AddListener (SkillUpClick);
+		skillExpGetBtn.onClick.AddListener (SKillExpClick);
 	}
 
 	// Update is called once per frame
@@ -44,5 +51,25 @@ public class CenterController : MonoBehaviour {
 
 	void SelectSkillClick(){
 		SceneManager.LoadScene ("SkillSelect");
+	}
+
+	void HeroIntoClick(){
+		SceneManager.LoadScene ("HeroInto");
+	}
+
+	void SkillGetClick(){
+		SceneManager.LoadScene ("SkillGet");
+	}
+
+	void SkillIntoClick(){
+		SceneManager.LoadScene ("SkillInto");
+	}
+
+	void SkillUpClick(){
+		SceneManager.LoadScene ("SkillUp");
+	}
+
+	void SKillExpClick(){
+		SceneManager.LoadScene ("SkillExp");
 	}
 }

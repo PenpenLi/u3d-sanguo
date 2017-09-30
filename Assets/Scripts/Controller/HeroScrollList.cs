@@ -13,21 +13,25 @@ public class HeroScrollList : MonoBehaviour, IHeroHttpRequestDelegate, IHeroItem
 
 	private float screenW;
 
+	void Awake(){
+		GameObject httpRequestObject = GameObject.FindGameObjectWithTag ("HeroHttpRequest");
+		if (httpRequestObject != null) {
+			heroRequest = httpRequestObject.GetComponent<HeroHttpRequest> ();
+			heroRequest.GetAllHeroSuccess += GetAllHeroSuccess;
+		} else {
+			Debug.Log ("httpRequestObject is null");
+		}
+	}
+
+	void OnDestroy(){
+		heroRequest.GetAllHeroSuccess -= GetAllHeroSuccess;
+	}
+
 	// Use this for initialization
 	void Start () {
 		RefreshDisplay ();
 
-		GameObject httpRequestObject = GameObject.FindGameObjectWithTag ("HeroHttpRequest");
-		if (httpRequestObject != null) {
-			heroRequest = httpRequestObject.GetComponent<HeroHttpRequest> ();
-			if (heroRequest == null) {
-				Debug.Log ("HeroHttpRequest script is null");
-			} else {
-				heroRequest.getAllHero (this);
-			}
-		} else {
-			Debug.Log ("httpRequestObject is null");
-		}
+		heroRequest.getAllHero ();
 
 		GameObject canvasObj = GameObject.FindGameObjectWithTag ("HeroCanvas");
 		if(canvasObj != null){

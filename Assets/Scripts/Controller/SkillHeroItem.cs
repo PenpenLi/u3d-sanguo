@@ -29,9 +29,15 @@ public class SkillHeroItem : MonoBehaviour {
 		this.currentHero = hero;
 
 		nameText.text = hero.nickname;
-		skillText.text = hero.skillId;
-		exSkill1Text.text = "1";
-		exSkill2Text.text = "2";
+		if(hero.skill != null){
+			skillText.text = hero.skill.skillName;
+		}
+		if(hero.exSkill1 != null){
+			exSkill1Text.text = hero.exSkill1.skillName;
+		}
+		if(hero.exSkill2 != null){
+			exSkill2Text.text = hero.exSkill2.skillName;
+		}
 	}
 
 	void ItemClick(){

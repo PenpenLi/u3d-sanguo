@@ -10,5 +10,8 @@ public class ProductModel
 
 	// '物品数量'
 	public int num;
+
+	// 合成数量
+	public int intoNum;
 }
 

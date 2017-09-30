@@ -13,6 +13,54 @@ public class SkillModel {
 	public string atkDest;
 	public string cond;
 	public string caution;
+
+
+	/**
+     * 用户战法Id
+     */
+	public string userSkillId;
+	/**
+     * '等级'
+     */
+	public int level;
+	/**
+     * 合成进度
+     */
+	public int percent;
+
+	/**
+     * '装配英雄编号'
+     */
+	public string useHeroId;
+
+	public InnerHeroModel useHeroModel;
+
+	public int canUpExp; // 升级需要的经验
+}
+
+[System.Serializable]
+public class InnerHeroModel {
+	public string userHeroId;
+	public string heroId;
+	public string nickname;
+	public string desc;
+	public int star;
+	public float cost;
+	public int type;
+	public int intelligence;
+	public int atkDist;
+	public int towerAtk;
+	public int attack;
+	public int defence;
+	public int speed;
+	public string skillId;
+	public string exSkillId;
+	public int status;
+	public int position;
+
+	public string exSkillId1;
+	public string exSkillId2;
+	public int exp;
 }
 
 
